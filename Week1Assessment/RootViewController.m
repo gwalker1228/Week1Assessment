@@ -97,26 +97,16 @@
 - (IBAction)onOperatorChanged:(UISegmentedControl *)sender {
 // change the operator displayed between text fields when operator selected in segmented control, preserving text attributes
 
-    // get original attributes of text
+     // get original attributes of text
     NSRange range = NSMakeRange(0, 1);
     NSDictionary *attributes = [self.operatorLabel.attributedText attributesAtIndex:0 effectiveRange: &range];
-    
-    switch (sender.selectedSegmentIndex) {
-        case 0:
-            [self.operatorLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"+" attributes:attributes]];
-            break;
-        case 1:
-            [self.operatorLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"-" attributes:attributes]];
-            break;
-        case 2:
-            [self.operatorLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"X" attributes:attributes]];
-            break;
-        case 3:
-            [self.operatorLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"/" attributes:attributes]];
-            break;
-        default:
-            break;
-    }
+
+    // get proper operator based on selected segment index
+    NSArray *operators = @[@"+", @"-", @"*", @"/"];
+    NSString * operator = operators[self.operatorSegmentedControl.selectedSegmentIndex];
+
+    // set operator label text with original text attributes
+    [self.operatorLabel setAttributedText:[[NSAttributedString alloc] initWithString:operator attributes:attributes]];
 }
 
 
