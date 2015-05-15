@@ -20,13 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // set self as delegate for web view
     self.webView.delegate = self;
 
+    // load web view with text from url property
     [self loadRequestWithText:self.url];
-
-
-    self.navigationItem.backBarButtonItem.title = @"Back";
 }
+
 
 -(void)loadRequestWithText:(NSString *)text {
 // load request with url from NSString *text
@@ -36,17 +36,20 @@
     [self.webView loadRequest:request];
 }
 
+
 #pragma mark - WebViewDelegate methods
+
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
 
+    // start animating activity indicator
     [self.loadingIndicator startAnimating];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 
+    // stop animating, hide activity indicator (hides when stopped)
     [self.loadingIndicator stopAnimating];
-    self.loadingIndicator.hidden = true;
 }
 
 @end
